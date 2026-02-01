@@ -59,6 +59,56 @@ h1, h2, h3 { font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
     font-weight: 700;
 }
 
+/* ALINEACIÓN DEL HEADER */
+.main-header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+/* CONTENEDOR DEL LOGO */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Espacio entre el dibujo del logo y el texto */
+}
+
+/* IMAGEN DEL LOGO */
+.main-logo {
+    height: 60px; /* Tamaño ideal para escritorio */
+    width: auto;
+    object-fit: contain;
+}
+
+/* TEXTO DEL LOGO */
+.logo-text {
+    color: #FFFFFF;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+
+.logo-text span {
+    color: #FFD700; /* Amarillo Vehicular */
+    display: block; /* Pone "BOSA" en una línea resaltada */
+}
+
+/* RESPONSIVE: Ajuste para celulares */
+@media (max-width: 768px) {
+    .main-logo {
+        height: 45px; /* Más pequeño en móvil para ahorrar espacio */
+    }
+    .logo-text {
+        font-size: 0.9rem;
+    }
+    .nav-links {
+        display: none; /* Oculta links de texto en móvil para no saturar */
+    }
+}
+
 /* HERO */
 .hero {
     background: linear-gradient(rgba(0,35,102,0.8), rgba(0,35,102,0.8)), url('https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?q=80&w=1600') center/cover;
