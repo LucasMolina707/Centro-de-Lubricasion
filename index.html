@@ -227,7 +227,7 @@
         .info-item i { color: var(--primary); font-size: 1.4rem; margin-top: 4px; flex-shrink: 0; }
         .info-item strong { color: var(--primary); }
 
-        /* WHATSAPP FLOAT */
+        /* WHATSAPP FLOAT - MODIFICADO PARA CTA EN MÓVILES */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
@@ -247,7 +247,12 @@
             text-decoration: none;
             cursor: pointer;
         }
-        .whatsapp-float:hover { transform: scale(1.1) rotate(10deg); }
+        .whatsapp-float:hover { transform: scale(1.1); }
+        
+        /* Texto del botón (oculto en desktop) */
+        .whatsapp-text {
+            display: none;
+        }
 
         footer {
             background: var(--black);
@@ -374,9 +379,29 @@
             }
             .btn { width: 100%; } /* Botones ancho completo para fácil touch */
             
+            /* TRANSFORMACIÓN DEL BOTÓN DE WHATSAPP PARA MÓVIL */
             .whatsapp-float {
-                width: 55px; height: 55px; font-size: 28px;
-                bottom: 20px; right: 20px;
+                width: auto; /* Ancho automático para adaptarse al texto */
+                height: auto;
+                padding: 12px 24px;
+                border-radius: 50px; /* Forma de píldora */
+                bottom: 25px; /* Más margen abajo para evitar recortes */
+                right: 20px; /* Más margen derecho */
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .whatsapp-text {
+                display: block; /* Mostrar texto CTA */
+                font-weight: 800;
+                font-size: 0.95rem;
+                letter-spacing: 0.5px;
+                white-space: nowrap;
+            }
+            
+            .whatsapp-float i {
+                font-size: 24px; /* Ícono ligeramente más pequeño para balancear */
             }
         }
 
@@ -397,6 +422,7 @@
 
 <a href="#" onclick="openWpModal(event)" class="whatsapp-float">
     <i class="fab fa-whatsapp"></i>
+    <span class="whatsapp-text">Agendar Cita</span>
 </a>
 
 <header class="main-header">
