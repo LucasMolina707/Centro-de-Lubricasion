@@ -29,127 +29,203 @@
             --white: #FFFFFF;
             --black: #1d2941;
             --overlay: rgba(29, 58, 122, 0.92);
+            /* Espaciado fluido */
+            --spacing-section: clamp(60px, 8vw, 100px);
+            --spacing-container: clamp(1rem, 5vw, 2rem);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
+        html { scroll-behavior: smooth; }
+
         body {
             font-family: 'Roboto', sans-serif;
             color: var(--white);
             line-height: 1.6;
+            font-size: 16px; /* Base size */
             background: linear-gradient(var(--overlay), var(--overlay)), 
                         url('https://centrodelubricasion.inglucas.com.co/data/seow.png');
             background-attachment: fixed;
             background-size: cover;
             background-position: center;
+            overflow-x: hidden; /* Previene scroll horizontal indeseado */
         }
 
         h1, h2, h3, .logo-text { font-family: 'Montserrat', sans-serif; text-transform: uppercase; }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 var(--spacing-container); 
+            width: 100%;
+        }
 
         /* HEADER */
         .main-header {
-            background: rgba(30, 34, 59, 0.95);
-            padding: 15px 0;
+            background: rgba(30, 34, 59, 0.98); /* Un poco más sólido para legibilidad */
+            padding: 12px 0;
             position: sticky;
             top: 0;
             z-index: 1000;
             border-bottom: 3px solid var(--accent);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
         nav { display: flex; justify-content: space-between; align-items: center; }
 
-        .logo-container { display: flex; align-items: center; gap: 15px; }
-        .main-logo { height: 60px; filter: drop-shadow(0 0 5px rgba(255,255,255,0.2)); }
-        .logo-text { font-size: 1.2rem; font-weight: 800; color: var(--white); }
-        .logo-text span { color: var(--accent); }
+        .logo-container { display: flex; align-items: center; gap: 12px; }
+        .main-logo { height: 50px; width: auto; filter: drop-shadow(0 0 5px rgba(255,255,255,0.2)); transition: transform 0.3s; }
+        
+        .logo-text { 
+            font-size: clamp(0.9rem, 2.5vw, 1.2rem); 
+            font-weight: 800; 
+            color: var(--white); 
+            line-height: 1.2;
+        }
+        .logo-text span { color: var(--accent); display: inline-block; }
 
-        .nav-links { display: flex; list-style: none; gap: 25px; }
+        .nav-links { display: flex; list-style: none; gap: clamp(15px, 2vw, 25px); }
         .nav-links a { 
             color: var(--white); 
             text-decoration: none; 
             font-weight: 700; 
             font-size: 0.9rem;
-            transition: 0.3s;
+            transition: color 0.3s ease;
+            letter-spacing: 0.5px;
         }
         .nav-links a:hover { color: var(--accent); }
 
-        /* HERO */
+        /* HERO - Tipografía y estructura fluida */
         .hero {
-            padding: 100px 0;
+            padding: var(--spacing-section) 0;
             text-align: center;
-            min-height: 80vh;
+            min-height: 85vh; /* Mejor altura en pantallas grandes */
+            /* Soporte para altura dinámica en móviles (barra de navegación del navegador) */
+            min-height: 85dvh; 
             display: flex;
             align-items: center;
+            justify-content: center;
         }
 
-        .hero-content h1 { font-size: 3.5rem; margin-bottom: 20px; line-height: 1.1; }
+        .hero-content { width: 100%; }
+
+        .hero-content h1 { 
+            font-size: clamp(2.2rem, 5vw + 1rem, 4rem); /* Fluido: Min 2.2rem, Max 4rem */
+            margin-bottom: 20px; 
+            line-height: 1.1; 
+            text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        
         .hero-tagline { 
             background: var(--accent); 
             color: var(--black); 
             display: inline-block; 
-            padding: 5px 20px; 
+            padding: 6px 16px; 
             font-weight: 800;
             margin-bottom: 25px;
             border-radius: 4px;
+            font-size: clamp(0.8rem, 2vw, 1rem);
+            letter-spacing: 1px;
         }
-        .hero-content p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 40px; }
+        
+        .hero-content p { 
+            font-size: clamp(1rem, 2vw, 1.25rem); 
+            max-width: 700px; 
+            margin: 0 auto 40px; 
+            opacity: 0.95;
+        }
 
-        /* BUTTONS */
+        /* BUTTONS - Optimizados para touch */
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap; /* Permite que bajen en móviles */
+        }
+
         .btn {
-            padding: 15px 35px;
+            padding: 16px 32px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 800;
-            display: inline-block;
-            transition: 0.3s transform ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
             cursor: pointer;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
-        .btn:hover { transform: translateY(-3px); }
-        .btn-primary { background: var(--accent); color: var(--black); margin-right: 15px; }
+        .btn:active { transform: scale(0.98); }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+        
+        .btn-primary { background: var(--accent); color: var(--black); border: 2px solid var(--accent); }
         .btn-secondary { background: transparent; border: 2px solid var(--white); color: var(--white); }
+        .btn-secondary:hover { background: rgba(255,255,255,0.1); }
 
         /* SECTIONS */
-        section { padding: 80px 0; }
-        .section-title { text-align: center; margin-bottom: 50px; font-size: 2.5rem; }
+        section { padding: var(--spacing-section) 0; }
+        
+        .section-title { 
+            text-align: center; 
+            margin-bottom: clamp(30px, 5vw, 50px); 
+            font-size: clamp(2rem, 4vw, 2.8rem); 
+        }
         .section-title::after {
-            content: ''; display: block; width: 80px; height: 4px; background: var(--accent); margin: 15px auto;
+            content: ''; display: block; width: 80px; height: 4px; background: var(--accent); margin: 15px auto; border-radius: 2px;
         }
 
+        /* GRIDS - Grid inteligente que no rompe en 320px */
         .grid-3 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            /* 280px es seguro para móviles estrechos como Galaxy Fold o iPhone SE */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
             gap: 30px;
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 40px;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.07);
+            padding: clamp(30px, 4vw, 40px);
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px); /* Soporte Safari */
             border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
-            transition: 0.3s;
+            transition: transform 0.3s, border-color 0.3s;
+            height: 100%; /* Igualar alturas */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        .card:hover { background: rgba(255, 255, 255, 0.1); border-color: var(--accent); }
+        .card:hover { background: rgba(255, 255, 255, 0.12); border-color: var(--accent); transform: translateY(-5px); }
         .card i { font-size: 3rem; color: var(--accent); margin-bottom: 20px; }
-        .card h3 { margin-bottom: 15px; }
+        .card h3 { margin-bottom: 15px; font-size: 1.4rem; }
+        .card p { font-size: 1rem; color: rgba(255,255,255,0.9); }
 
         /* LOCATION AREA */
         .location-grid {
             display: grid;
             grid-template-columns: 1.5fr 1fr;
-            gap: 40px;
+            gap: 0; /* Gap en 0 para diseño unido */
             background: var(--white);
             color: var(--black);
             border-radius: 20px;
             overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
-        .map-container iframe { width: 100%; height: 100%; min-height: 400px; }
-        .location-info { padding: 40px; }
-        .info-item { display: flex; align-items: center; gap: 15px; margin-bottom: 25px; }
-        .info-item i { color: var(--primary); font-size: 1.5rem; }
+        .map-container iframe { width: 100%; height: 100%; min-height: 450px; display: block; }
+        .location-info { 
+            padding: clamp(30px, 5vw, 50px); 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .location-info h3 { margin-bottom: 20px; color: var(--primary); font-size: 1.5rem; }
+        .info-item { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 20px; }
+        .info-item i { color: var(--primary); font-size: 1.4rem; margin-top: 4px; flex-shrink: 0; }
+        .info-item strong { color: var(--primary); }
 
         /* WHATSAPP FLOAT */
         .whatsapp-float {
@@ -157,57 +233,58 @@
             bottom: 30px;
             right: 30px;
             background: #25d366;
-            width: 65px;
-            height: 65px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 35px;
+            font-size: 32px;
             color: white;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             z-index: 9999;
-            transition: 0.3s;
+            transition: transform 0.3s;
             text-decoration: none;
             cursor: pointer;
         }
-        .whatsapp-float:hover { transform: scale(1.1); }
+        .whatsapp-float:hover { transform: scale(1.1) rotate(10deg); }
 
         footer {
             background: var(--black);
             padding: 40px 0;
             text-align: center;
-            border-top: 1px solid var(--industrial);
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
 
         /* --- ESTILOS DEL MODAL INTELIGENTE --- */
         .modal-overlay {
-            display: none; /* Oculto por defecto */
+            display: none;
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85);
+            background: rgba(18, 18, 18, 0.9);
             z-index: 10001;
             align-items: center;
             justify-content: center;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
+            padding: 20px; /* Margen de seguridad en móviles */
         }
 
         .modal-box {
             background: var(--white);
-            color: var(--black);
-            padding: 30px;
-            border-radius: 15px;
-            width: 90%;
+            color: #333;
+            padding: 35px 30px;
+            border-radius: 16px;
+            width: 100%;
             max-width: 400px;
             position: relative;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            animation: slideIn 0.3s ease-out;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            animation: slideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         @keyframes slideIn {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from { transform: translateY(30px) scale(0.95); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
         }
 
         .modal-close {
@@ -215,10 +292,11 @@
             top: 15px; right: 15px;
             border: none;
             background: none;
-            font-size: 24px;
+            font-size: 28px;
             cursor: pointer;
-            color: var(--industrial);
+            color: #999;
             transition: 0.2s;
+            line-height: 1;
         }
         .modal-close:hover { color: var(--primary); }
 
@@ -227,22 +305,27 @@
             margin-bottom: 8px;
             font-weight: 700;
             color: var(--primary);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
 
+        /* Importante: font-size 16px evita zoom en iOS al hacer focus */
         .modal-input, .modal-select {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #eee;
-            border-radius: 8px;
-            margin-bottom: 20px;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 25px;
             font-family: inherit;
-            font-size: 1rem;
+            font-size: 16px; 
             transition: 0.3s;
+            background: #fafafa;
+            color: #333;
         }
         .modal-input:focus, .modal-select:focus {
             border-color: var(--primary);
+            background: #fff;
             outline: none;
+            box-shadow: 0 0 0 3px rgba(29, 58, 122, 0.1);
         }
 
         .btn-modal-submit {
@@ -250,25 +333,63 @@
             background: #25d366;
             color: white;
             border: none;
-            padding: 15px;
+            padding: 16px;
             border-radius: 50px;
             font-weight: 800;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.1rem;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
             transition: 0.3s;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
         }
         .btn-modal-submit:hover { background: #1da851; transform: translateY(-2px); }
 
-        /* MOBILE RESPONSIVE */
+        /* --- RESPONSIVE MEDIA QUERIES (METICULOSAS) --- */
+        
+        /* Tablets (Portrait) y Móviles Grandes */
+        @media (max-width: 900px) {
+            .location-grid { 
+                grid-template-columns: 1fr; /* Mapa arriba, info abajo */
+                max-width: 600px;
+                margin: 0 auto;
+            }
+            .map-container iframe { 
+                min-height: 300px; /* Reducir altura de mapa en tablet */
+            }
+        }
+
+        /* Móviles (Landscape y Portrait) */
         @media (max-width: 768px) {
             .nav-links, .cta-button-header { display: none; }
-            .hero-content h1 { font-size: 2.2rem; }
-            .location-grid { grid-template-columns: 1fr; }
-            .hero-btns .btn { width: 100%; margin: 10px 0; }
+            .logo-container { margin: 0 auto; } /* Centrar logo en móvil */
+            
+            .hero-btns {
+                flex-direction: column; /* Botones uno debajo del otro */
+                width: 100%;
+                max-width: 350px;
+                margin: 0 auto;
+            }
+            .btn { width: 100%; } /* Botones ancho completo para fácil touch */
+            
+            .whatsapp-float {
+                width: 55px; height: 55px; font-size: 28px;
+                bottom: 20px; right: 20px;
+            }
+        }
+
+        /* Móviles Pequeños (iPhone SE, etc.) */
+        @media (max-width: 480px) {
+            .main-logo { height: 40px; }
+            .logo-text { font-size: 1rem; }
+            
+            /* Ajuste fino para evitar que el mapa ocupe toda la pantalla vertical */
+            .map-container iframe { height: 250px; min-height: 250px; }
+            
+            .location-info { padding: 30px 20px; }
+            .modal-box { padding: 25px 20px; }
         }
     </style>
 </head>
@@ -360,7 +481,7 @@
             </div>
             <div class="location-info">
                 <h3>Contacto Directo</h3>
-                <hr style="margin: 20px 0; border: 0; border-top: 1px solid #ddd;">
+                <hr style="margin: 20px 0; border: 0; border-top: 1px solid #e0e0e0;">
                 
                 <div class="info-item">
                     <i class="fas fa-map-location-dot"></i>
